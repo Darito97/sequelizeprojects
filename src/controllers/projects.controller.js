@@ -29,38 +29,50 @@ const createProject = async (req, res) => {
 };
 
 const updateProject = async (req, res) => {
-  const id = req.params.id;
-  console.log(id);
-  const { name, priority, description } = req.body;
-  const project = await Project.update(
-    {
-      name,
-      priority,
-      description,
-    },
-    {
-      where: {
-        id: id,
+  try {
+    const id = req.params.id;
+    console.log(id);
+    const { name, priority, description } = req.body;
+    const project = await Project.update(
+      {
+        name,
+        priority,
+        description,
       },
-    }
-  );
-  res.json({
-    msg: "Proyecto actualizado correctamente",
-    project,
-  });
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+    res.json({
+      msg: "Proyecto actualizado correctamente",
+      project,
+    });
+  } catch (err) {
+    res.status(500).json({
+      msg: "Error en el servidor",
+    });
+  }
 };
 
 const deleteProject = async (req, res) => {
-  const id = req.params.id;
-  const project = await Project.destroy({
-    where: {
-      id: id,
-    },
-  });
-  res.json({
-    msg: "Proyecto eliminado correctamente",
-    project,
-  });
+  try {
+    const id = req.params.id;
+    const project = await Project.destroy({
+      where: {
+        id: id,
+      },
+    });
+    res.json({
+      msg: "Proyecto eliminado correctamente",
+      project,
+    });
+  } catch (err) {
+    res.status(500).json({
+      msg: "Error en el servidor",
+    });
+  }
 };
 
 export { getProjects, createProject, updateProject, deleteProject };
