@@ -19,8 +19,7 @@ const createProject = async (req, res) => {
       priority,
       description,
     });
-    console.log(newProject.dataValues);
-    res.json("POSTING /projects");
+    res.json(newProject);
   } catch (err) {
     res.status(500).json({
       msg: "Error en el servidor",

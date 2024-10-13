@@ -27,6 +27,6 @@ const Project = sequelize.define(
 
 /*Conexion de uno a muchos */
 Project.hasMany(Task, { foreignKey: "projectId" });
-Task.belongsTo(Project, { foreignKey: "projectId" });
+Task.belongsTo(Project);
 
 export default Project;
