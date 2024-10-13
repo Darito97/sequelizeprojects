@@ -83,6 +83,11 @@ const getProject = async (req, res) => {
         id: id,
       },
     });
+    if (!project) {
+      return res.status(404).json({
+        msg: "Proyecto no encontrado",
+      });
+    }
     res.json(project);
   } catch (err) {
     res.status(500).json({
