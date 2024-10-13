@@ -75,4 +75,20 @@ const deleteProject = async (req, res) => {
   }
 };
 
-export { getProjects, createProject, updateProject, deleteProject };
+const getProject = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const project = await Project.findOne({
+      where: {
+        id: id,
+      },
+    });
+    res.json(project);
+  } catch (err) {
+    res.status(500).json({
+      msg: "Error en el servidor",
+    });
+  }
+};
+
+export { getProjects, createProject, updateProject, deleteProject, getProject };
